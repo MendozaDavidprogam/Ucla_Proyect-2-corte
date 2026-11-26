@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cafetería de Especialidad - HTML Plano</title>
+</head>
+
+<body>
+
+  <section id="cafeteria">
+    <h2>Cafetería de Especialidad (HTML Plano)</h2>
+    <button id="cafeteria_btNuevaBebida">Nueva Bebida</button>
+    <hr>
+    <div id="cafeteria_lstBebidas"></div>
+    <hr>
+    <div id="cafeteria_lstAzucar"></div>
+    <hr>
+    <div>Monto total de ventas: <span id="cafeteria_lblMontoTotalVenta">$0.00</span></div>
+    <div>Bebidas con precio mayor a $4: <span id="cafeteria_lblCantidadBebidaPrecioMayor4">0</span></div>
+    <div>Promedio de azúcar por bebida: <span id="cafeteria_lblPromedioAzucar">0.00 g</span></div>
+  </section>
+
+  <section id="bebida" hidden style="margin-top: 20px; border: 1px solid #ccc; padding: 15px; width: 320px;">
+    <h5>Registrar Bebida</h5>
+    <div>
+      <label>Nombre:
+        <input type="text" id="bebida_inNombre" placeholder="Ej: Latte">
+      </label>
+    </div>
+    <div>
+      <label>Precio base ($):
+        <input type="number" id="bebida_inPrecioBase" placeholder="Ej: 3.00" min="0" step="0.01">
+      </label>
+    </div>
+    <div>
+      <label>Tipo:
+        <select id="bebida_selTipo">
+          <option value="caliente">Caliente</option>
+          <option value="fria">Fría</option>
+        </select>
+      </label>
+    </div>
+    <div id="bebida_rowLecheVegetal">
+      <label>
+        <input type="checkbox" id="bebida_chkLecheVegetal"> Leche vegetal (recargo $0.75)
+      </label>
+    </div>
+    <div id="bebida_rowGrande" hidden>
+      <label>
+        <input type="checkbox" id="bebida_chkGrande"> Tamaño grande (recargo 20%)
+      </label>
+    </div>
+    <br>
+    <button id="bebida_btCancelar">Cancelar</button>
+    <button id="bebida_btAceptar">Aceptar</button>
+  </section>
+
+  <script type="module">
+    import cCafeteria from "./dist/controllers/cCafeteria.js";
+    import cBebida from "./dist/controllers/cBebida.js";
+
+    import vCafeteriaPlain from "./dist/views/vCafeteriaPlain.js";
+    import vBebidaPlain from "./dist/views/vBebidaPlain.js";
+
+    const vistaCafeteria = new vCafeteriaPlain();
+    const vistaBebida = new vBebidaPlain();
+
+    const controladorBebida = new cBebida(vistaBebida);
+    new cCafeteria(vistaCafeteria, controladorBebida);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblioteca Digital - Bootstrap</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id="app-bootstrap" class="container mt-5">
+    <h2>Biblioteca Digital y Préstamo de Equipos (Bootstrap)</h2>
+    <button type="button" class="btn btn-primary" id="body_btNuevoRecurso">Nuevo Préstamo</button>
+    <hr>
+    <div id="body_lstPrestamos" class="list-group mb-3"></div>
+    <div id="body_lstReputacion" class="list-group mb-3"></div>
+    <div class="alert alert-info">
+      <div>Total recaudado: $<span id="body_lblTotalRecaudado" class="fw-bold">0.00</span></div>
+      <div>Cantidad de préstamos con retraso: <span id="body_lblCantidadRetrasos" class="fw-bold">0</span></div>
+      <div>Porcentaje de préstamos de Tablets: <span id="body_lblPorcentajeTablets" class="fw-bold">0</span>%</div>
+      <div>Balance neto de reputación: <span id="body_lblBalanceReputacion" class="fw-bold">0</span> pts</div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="recurso" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Procesar Recurso</h5>
+        </div>
+        <div class="modal-body">
+          <label class="form-label" for="recurso_inCodigo">Código:</label>
+          <input type="text" class="form-control" id="recurso_inCodigo" placeholder="Ej: P01">
+          <label class="form-label mt-2" for="recurso_inEstudiante">Estudiante:</label>
+          <input type="text" class="form-control" id="recurso_inEstudiante" placeholder="Ej: Mario">
+          <label class="form-label mt-2" for="recurso_inTipo">Tipo:</label>
+          <select class="form-select" id="recurso_inTipo">
+            <option value="Libro">Libro</option>
+            <option value="Tablet">Tablet</option>
+          </select>
+          <label class="form-label mt-2" for="recurso_inDiasRetraso">Días de retraso:</label>
+          <input type="number" class="form-control" id="recurso_inDiasRetraso" min="0" placeholder="Ej: 3">
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" id="recurso_inReserva">
+            <label class="form-check-label" for="recurso_inReserva">Colección de reserva (solo aplica a Libro)</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="recurso_btCancelar">Cancelar</button>
+          <button type="button" class="btn btn-success" id="recurso_btAceptar">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script type="module">
+    import cBiblioteca from "./dist/controllers/cBiblioteca.js";
+    import cRecurso from "./dist/controllers/cRecurso.js";
+
+    import vBibliotecaBootstrap from "./dist/views/vBibliotecaBootstrap.js";
+    import vRecursoBootstrap from "./dist/views/vRecursoBootstrap.js";
+
+    const vistaBiblioteca = new vBibliotecaBootstrap();
+    const vistaRecurso = new vRecursoBootstrap();
+
+    const controladorRecurso = new cRecurso(vistaRecurso);
+    new cBiblioteca(vistaBiblioteca, controladorRecurso);
+  </script>
+</body>
+
+</html>

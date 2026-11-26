@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carnetización Universitaria MVC</title>
+</head>
+<body>
+<!-- SECCIÓN DE LA VISTA MAYOR -->
+    <section id="body">
+        <h2>Carnetización Universitaria</h2>
+        <button id="body_btNuevaSolicitud">Nueva Solicitud</button>
+        <hr />
+        <div id="body_lblDetalleSolicitud"></div>
+        <div>Monto Total Recaudado: $<span id="body_lblTotalRecaudado">0</span></div>
+        <div>Cantidad de carnets por reposición: <span id="body_lblCantidadReposiciones">0</span></div>
+        <hr />
+        <div id="body_lblDetalleTiempoEmision"></div>
+        <div>Tiempo total de emisión: <span id="body_lblTiempoTotalEmision">0 min</span></div>
+        <div>Promedio de emisión por trámite: <span id="body_lblPromedioTiempoEmision">0 min</span></div>
+    </section>
+
+    <!-- SECCIÓN DE LA VISTA MENOR (INICIA OCULTA CON hidden) -->
+    <section id="solicitud" hidden style="margin-top: 20px; border: 1px solid #ccc; padding: 15px; width: 340px;">
+        <h5>Procesar Solicitud de Carnet</h5>
+        <div>
+            <label>Cédula:
+                <input type="text" id="solicitud_inCedula" placeholder="Ej: 28123456" />
+            </label>
+        </div>
+        <div>
+            <label>Nombre:
+                <input type="text" id="solicitud_inNombre" placeholder="Nombre completo" />
+            </label>
+        </div>
+        <div>
+            <label>Tipo de trámite:
+                <select id="solicitud_selTipo">
+                    <option value="Nuevo">Nuevo</option>
+                    <option value="Reposicion">Reposición</option>
+                </select>
+            </label>
+        </div>
+        <div id="solicitud_divExtravio" hidden>
+            <label>Extravíos previos:
+                <input type="number" id="solicitud_inCantExtravioPrevio" min="0" value="0" />
+            </label>
+        </div>
+        <br />
+        <button id="solicitud_btCancelar">Cancelar</button>
+        <button id="solicitud_btAceptar">Aceptar</button>
+    </section>
+
+    <!-- SCRIPT MODULAR DE ARRANQUE E INYECCIÓN DE DEPENDENCIAS -->
+    <script type="module">
+        import cCarnetizacion from "./dist/controllers/cCarnetizacion.js";
+        import cSolicitud from "./dist/controllers/cSolicitud.js";
+        import vCarnetizacionPlain from "./dist/views/vCarnetizacionPlain.js";
+        import vSolicitudPlain from "./dist/views/vSolicitudPlain.js";
+
+        // 1. Instanciación de las Vistas concretas
+        const vistaMayor = new vCarnetizacionPlain();
+        const vistaMenor = new vSolicitudPlain();
+
+        // 2. Inyección en los Controladores
+        const controladorMenor = new cSolicitud(vistaMenor);
+        new cCarnetizacion(vistaMayor, controladorMenor);
+    </script>
+</body>
+</html>

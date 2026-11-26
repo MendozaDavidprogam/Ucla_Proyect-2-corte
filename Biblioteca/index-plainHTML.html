@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblioteca Digital - HTML Plano</title>
+</head>
+
+<body>
+
+  <section id="body">
+    <h2>Biblioteca Digital y Préstamo de Equipos (HTML Plano)</h2>
+    <button id="body_btNuevoRecurso">Nuevo préstamo</button>
+    <hr>
+    <div id="body_lstPrestamos"></div>
+    <hr>
+    <div id="body_lstReputacion"></div>
+    <hr>
+    <div>Total recaudado: $<span id="body_lblTotalRecaudado">0.00</span></div>
+    <div>Cantidad de préstamos con retraso: <span id="body_lblCantidadRetrasos">0</span></div>
+    <div>Porcentaje de préstamos de Tablets: <span id="body_lblPorcentajeTablets">0</span>%</div>
+    <div>Balance neto de reputación: <span id="body_lblBalanceReputacion">0</span> pts</div>
+  </section>
+
+  <section id="recurso" hidden style="margin-top: 20px; border: 1px solid #ccc; padding: 15px; width: 320px;">
+    <h5>Procesar Recurso</h5>
+    <div>
+      <label>Código:
+        <input type="text" id="recurso_inCodigo" placeholder="Ej: P01">
+      </label>
+    </div>
+    <div>
+      <label>Estudiante:
+        <input type="text" id="recurso_inEstudiante" placeholder="Ej: Mario">
+      </label>
+    </div>
+    <div>
+      <label>Tipo:
+        <select id="recurso_inTipo">
+          <option value="Libro">Libro</option>
+          <option value="Tablet">Tablet</option>
+        </select>
+      </label>
+    </div>
+    <div>
+      <label>Días de retraso:
+        <input type="number" id="recurso_inDiasRetraso" min="0" placeholder="Ej: 3">
+      </label>
+    </div>
+    <div>
+      <label>
+        <input type="checkbox" id="recurso_inReserva"> Colección de reserva (solo aplica a Libro)
+      </label>
+    </div>
+    <br>
+    <button id="recurso_btCancelar">Cancelar</button>
+    <button id="recurso_btAceptar">Aceptar</button>
+  </section>
+
+  <script type="module">
+    import cBiblioteca from "./dist/controllers/cBiblioteca.js";
+    import cRecurso from "./dist/controllers/cRecurso.js";
+
+    import vBibliotecaPlain from "./dist/views/vBibliotecaPlain.js";
+    import vRecursoPlain from "./dist/views/vRecursoPlain.js";
+
+    const vistaBiblioteca = new vBibliotecaPlain();
+    const vistaRecurso = new vRecursoPlain();
+
+    const controladorRecurso = new cRecurso(vistaRecurso);
+    new cBiblioteca(vistaBiblioteca, controladorRecurso);
+  </script>
+</body>
+
+</html>
