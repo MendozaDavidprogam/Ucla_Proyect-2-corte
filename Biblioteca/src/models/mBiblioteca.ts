@@ -1,4 +1,5 @@
 import mRecurso from "./mRecurso.js";
+import mTablet from "./mTablet.js";
 
 export default class mBiblioteca {
   private acumRecaudado: number = 0;
@@ -22,7 +23,7 @@ export default class mBiblioteca {
     if (recurso.tieneRetraso()) {
       this.contRetrasos++;
     }
-    if (recurso.obtenerTipo() === "Tablet") {
+    if (recurso instanceof mTablet) {
       this.contTablets++;
     }
   }
